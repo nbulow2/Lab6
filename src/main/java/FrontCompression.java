@@ -44,8 +44,18 @@ public class FrontCompression {
         /*
          * Complete this function.
          */
+        String compressed = " ";
+        String[] text = corpus.split(" ");
+        for (int i = 0; i < text.length; i++) {
+            if (i == 0) {
+                compressed += "0 " + text[0] + " ";
+             } else {
+                 int q = longestPrefix(text[i], text[i - 1]);
+                 compressed += (q + " " + text[i].substring(q - 1, text[i].length()) + " ");
+             }
+        }
 
-        return "";
+        return compressed;
     }
 
     /**
@@ -67,8 +77,20 @@ public class FrontCompression {
         /*
          * Complete this function.
          */
+        String d_words = "";
+        String[] text = corpus.split("/n");
+        for (int i = 0; i < text.length; i++) {
+            if (i == 0 || text[i].charAt(0) == 0) {
+                d_words = d_words + text[i] + "\n";
+            } else {
+                int q = text[i].charAt(0);
+                String add = text[i - 1].substring(0, q);
+                String add2 = add + text[i];
+                d_words += add2;
+            }
+        }
 
-        return "";
+        return d_words;
     }
 
     /**
@@ -82,7 +104,21 @@ public class FrontCompression {
         /*
          * Complete this function.
          */
-        return 0;
+        int l = 0;
+        String base = " ";
+        if (firstString.length() < secondString.length()) {
+            l = firstString.length();
+        } else {
+            l = secondString.length();
+        }
+        for (int i = 0; i < l; i++) {
+            if (firstString.charAt(i) == secondString.charAt(i)) {
+                base += firstString.charAt(i);
+            } else {
+                break;
+            }
+        }
+        return base.length();
     }
 
     /**
